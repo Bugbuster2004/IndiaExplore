@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/app/generated/prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum UserType {
+  CLIENT
+  ADMIN
+  ADVOCATE
+}
+
+model User {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  name       String?  @default("Anonymous")
+  email      String   @unique
+  image      String?
+  role       UserType @default(CLIENT)
+  onboarding Boolean? @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model DailyMessageCount {
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId String   @db.ObjectId
+  date   DateTime // UTC date at midnight
+  count  Int      @default(0)
+
+  @@unique([userId, date])
+}
+
+model Order {
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId           String    @db.ObjectId
+  advocateID       String?   @db.ObjectId
+  advocateName     String?   @default("")
+  name             String
+  caseType         String
+  grievance        String?
+  city             String
+  language         String
+  callmode         String
+  callduration     Int
+  date             DateTime?
+  time             String
+  phone            String
+  totalCost        Int
+  transactionId    String
+  paymentStatus    Boolean?  @default(false)
+  advocateAssigned Boolean?  @default(false)
+  createdAt        DateTime  @default(now())
+}
+
+// Add this model if it doesn't exist
+model Location {
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  address       String         @unique
+  name          String
+  BannerImages  BannerImage[]
+  // Add other fields as needed
+}
+
+model BannerImage {
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  url         String
+  location    Location    @relation(fields: [locationId], references: [id])
+  locationId  String      @db.ObjectId
+}

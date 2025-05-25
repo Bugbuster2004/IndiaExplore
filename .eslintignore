@@ -1,0 +1,5 @@
+# Ignore generated Prisma files - these shouldn't be modified
+src/app/generated/**
+node_modules
+.next
+public
