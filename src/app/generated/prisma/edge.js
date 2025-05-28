@@ -170,7 +170,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/saksham/Documents/lawnew/IndiaExplore-main/src/app/generated/prisma",
+      "value": "C:\\Users\\lenovo\\OneDrive\\Desktop\\Conversia-law\\IndiaExplore\\src\\app\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -179,16 +179,17 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-3.0.x",
+        "value": "windows",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/saksham/Documents/lawnew/IndiaExplore-main/prisma/schema.prisma",
+    "sourceFilePath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\Conversia-law\\IndiaExplore\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null
+    "rootEnvPath": null,
+    "schemaEnvPath": "../../../../.env"
   },
   "relativePath": "../../../../prisma",
   "clientVersion": "6.7.0",
